@@ -4,21 +4,21 @@
 //---------------------------------------------------------------------------
 
 
-USEFORM("..\appcmn\refdlg.cpp", RefDialog);
 USEFORM("..\appcmn\keydlg.cpp", KeyDialog);
+USEFORM("..\appcmn\refdlg.cpp", RefDialog);
 USEFORM("..\appcmn\serioptdlg.cpp", SerialOptDialog);
-USEFORM("..\appcmn\viewer.cpp", TextViewer);
 USEFORM("..\appcmn\tcpoptdlg.cpp", TcpOptDialog);
-USEFORM("..\appcmn\cmdoptdlg.cpp", CmdOptDialog);
+USEFORM("..\appcmn\viewer.cpp", TextViewer);
 USEFORM("..\appcmn\aboutdlg.cpp", AboutDialog);
+USEFORM("..\appcmn\cmdoptdlg.cpp", CmdOptDialog);
 USEFORM("..\appcmn\confdlg.cpp", ConfDialog);
-USEFORM("..\appcmn\ftpoptdlg.cpp", FtpOptDialog);
 USEFORM("..\appcmn\fileoptdlg.cpp", FileOptDialog);
-USEFORM("svroptdlg.cpp", SvrOptDialog);
-USEFORM("svrmain.cpp", MainForm);
-USEFORM("convdlg.cpp", ConvDialog);
+USEFORM("..\appcmn\ftpoptdlg.cpp", FtpOptDialog);
 USEFORM("..\appcmn\vieweropt.cpp", ViewerOptDialog);
+USEFORM("svroptdlg.cpp", SvrOptDialog);
+USEFORM("convdlg.cpp", ConvDialog);
 USEFORM("mondlg.cpp", StrMonDialog);
+USEFORM("svrmain.cpp", MainForm);
 //---------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

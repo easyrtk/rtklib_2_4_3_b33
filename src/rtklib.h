@@ -176,7 +176,7 @@ extern "C" {
 #endif
 #ifdef ENACMP
 #define MINPRNCMP   1                   /* min satellite sat number of BeiDou */
-#define MAXPRNCMP   37                  /* max satellite sat number of BeiDou */
+#define MAXPRNCMP   61                  /* max satellite sat number of BeiDou https://www.glonass-iac.ru/en/BEIDOU/ */
 #define NSATCMP     (MAXPRNCMP-MINPRNCMP+1) /* number of BeiDou satellites */
 #define NSYSCMP     1
 #else
@@ -449,10 +449,11 @@ extern "C" {
 #define STRFMT_RNXCLK 19                /* stream format: RINEX CLK */
 #define STRFMT_SBAS  20                 /* stream format: SBAS messages */
 #define STRFMT_NMEA  21                 /* stream format: NMEA 0183 */
+#define STRFMT_HYFIX 22                 /* stream format: HYFIX */
 #ifndef EXTLEX
-#define MAXRCVFMT    15                 /* max number of receiver format */
+#define MAXRCVFMT    22                 /* max number of receiver format */
 #else
-#define MAXRCVFMT    16
+#define MAXRCVFMT    22
 #endif
 
 #define STR_MODE_R  0x1                 /* stream mode: read */
@@ -1673,6 +1674,7 @@ EXPORT int input_sbf   (raw_t *raw, unsigned char data);
 EXPORT int input_cmr   (raw_t *raw, unsigned char data);
 EXPORT int input_tersus(raw_t *raw, unsigned char data);
 EXPORT int input_lexr  (raw_t *raw, unsigned char data);
+EXPORT int input_hyfix (raw_t *raw, unsigned char data);
 EXPORT int input_oem4f (raw_t *raw, FILE *fp);
 EXPORT int input_oem3f (raw_t *raw, FILE *fp);
 EXPORT int input_ubxf  (raw_t *raw, FILE *fp);
@@ -1688,6 +1690,7 @@ EXPORT int input_sbff  (raw_t *raw, FILE *fp);
 EXPORT int input_cmrf  (raw_t *raw, FILE *fp);
 EXPORT int input_tersusf(raw_t *raw, FILE *fp);
 EXPORT int input_lexrf (raw_t *raw, FILE *fp);
+EXPORT int input_hyfixf(raw_t *raw, FILE *fp);
 
 EXPORT int gen_ubx (const char *msg, unsigned char *buff);
 EXPORT int gen_stq (const char *msg, unsigned char *buff);

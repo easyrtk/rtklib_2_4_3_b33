@@ -232,11 +232,12 @@ const char *formatstrs[32]={    /* stream format strings */
     "CMR/CMR+",                 /* 14 */
     "TERSUS",                   /* 15 */
     "LEX Receiver",             /* 16 */
-    "RINEX",                    /* 17 */
-    "SP3",                      /* 18 */
-    "RINEX CLK",                /* 19 */
-    "SBAS",                     /* 20 */
-    "NMEA 0183",                /* 21 */
+	"RINEX",                    /* 17 */
+	"SP3",                      /* 18 */
+	"RINEX CLK",                /* 19 */
+	"SBAS",                     /* 20 */
+	"NMEA 0183",                /* 21 */
+	"HYFIX",                    /* 22 */
     NULL
 };
 static char *obscodes[]={       /* observation code strings */
@@ -2915,6 +2916,10 @@ extern void trace(int level, const char *format, ...)
     fprintf(fp_trace,"%d ",level);
     va_start(ap,format); vfprintf(fp_trace,format,ap); va_end(ap);
     fflush(fp_trace);
+#ifdef _DEBUG
+    fprintf(stderr, "%d ", level);
+    va_start(ap, format); vfprintf(stderr, format, ap); va_end(ap);
+#endif
 }
 extern void tracet(int level, const char *format, ...)
 {

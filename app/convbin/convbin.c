@@ -545,8 +545,73 @@ static int cmdopts(int argc, char **argv, rnxopt_t *opt, char **ifile,
     return format;
 }
 /* main ----------------------------------------------------------------------*/
+#if 0 /* sample data test */
+static raw_t raw = { 0 };
+static rtcm_t rtcm = { 0 };
+#endif
 int main(int argc, char **argv)
 {
+#if 0 /* sample data test */
+    FILE *fHYFIX = fopen("C:\\com_tools\\new\\2021-1-4-10-57-17-COM32.bin", "rb");
+    if (fHYFIX!=NULL)
+    {
+        tracelevel(4);
+        traceopen("test.log");
+        int ret_rtcm = init_rtcm(&rtcm);
+        int ret = 0;
+        if (init_raw(&raw, STRFMT_HYFIX))
+        {
+            while (!feof(fHYFIX))
+            {
+                ret=input_hyfixf(&raw, fHYFIX);
+                if (ret == 1)
+                {
+                    /* raw data */
+                    ret = 0;
+                }
+                else if (ret == 2)
+                {
+                    /* eph */
+                    ret = 0;
+                }
+                else if (ret == 5)
+                {
+                    /* PVT */
+                    ret = 0;
+                }
+                else if (ret == 10)
+                {
+                    /* rtcm base station data */
+                    for (int i=0;i<raw.nbyte;++i)
+                    {
+                        ret = input_rtcm3(&rtcm, raw.buff[i]);
+                        if (ret == 1)
+                        {
+                            /* obs */
+                            ret = 0;
+                        }
+                        else if (ret == 2)
+                        {
+                            /* eph */
+                            ret = 0;
+                        }
+                        else if (ret == 5)
+                        {
+                            /* coordinate */
+                            ret = 0;
+                        }
+                    }
+                    ret = 0;
+                }
+            }
+            free_raw(&raw);
+        }
+        if (ret_rtcm) free_rtcm(&rtcm);
+        fclose(fHYFIX);
+        traceclose();
+    }
+    return 0;
+#endif
     rnxopt_t opt={{0}};
     int format,trace=0,stat;
     char *ifile="",*ofile[NOUTFILE]={0},*dir="";
