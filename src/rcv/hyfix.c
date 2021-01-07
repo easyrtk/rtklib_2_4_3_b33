@@ -571,7 +571,7 @@ static int decode_hyfix(raw_t *raw, int type)
 {
 	unsigned char* tx_buff = raw->buff;
 	int i = 0;
-    double dt=0.0;
+    double dt=0.0,blh[3]={0};
     if (type == 1000)
     {
         /* eph */
@@ -712,7 +712,7 @@ static int decode_hyfix(raw_t *raw, int type)
                 memset(raw->obs.data+i, 0, sizeof(obsd_t));
         }
 		if (raw->outtype)
-			sprintf(raw->msgtype,"ASC_MEAS: RcvTOW=%f, Week=%u, Leaps=%d, NumMeas=%u, RecStat=%u\r\n",
+			sprintf(raw->msgtype,"ASC_MEAS: %f, %u, %d, %u, %u\r\n",
             ASC_Meas->RcvTow,
             ASC_Meas->Week,
             ASC_Meas->LeapS,
@@ -723,9 +723,19 @@ static int decode_hyfix(raw_t *raw, int type)
     }
     else if (type == 3000)
     {
-        Hyfix_PVT_PVT_TypeDef* PVT_Info = (Hyfix_PVT_PVT_TypeDef*)tx_buff;
+		Hyfix_PVT_PVT_TypeDef* PVT_Info = (Hyfix_PVT_PVT_TypeDef*)tx_buff;
 
-        if (raw->outtype) sprintf(raw->msgtype,"NAV-PVT: Tow=%u, DateTime=%.4u-%.2u-%.2u %.2u:%.2u:%.2u.%d, FixType=%u, NumSv=%u, LLA=(%f, %f, %f), DoP=%f, leapS:%d, Speed=%f, Heading=%f, Valid=%u \r\n",
+		if (PVT_Info->Valid==23) {
+			blh[0] = PVT_Info->Lat * 1e-7 * D2R;
+			blh[1] = PVT_Info->Lon * 1e-7 * D2R;
+			blh[2] = PVT_Info->H_MSL * 1e-3;
+			pos2ecef(blh, raw->sta.pos);
+			if (raw->outtype) sprintf(raw->msgtype,"NAV-PVT: %10.3f,%14.9f,%14.9f,%10.4f,%14.4f,%14.4f,%14.4f\r\n",
+				PVT_Info->TOW/1000.0, blh[0],blh[1],blh[2],raw->sta.pos[0],raw->sta.pos[1],raw->sta.pos[2]);
+
+		}
+		#if 0
+		if (raw->outtype) sprintf(raw->msgtype,"NAV-PVT: Tow=%u, DateTime=%.4u-%.2u-%.2u %.2u:%.2u:%.2u.%d, FixType=%u, NumSv=%u, LLA=(%f, %f, %f), DoP=%f, leapS:%d, Speed=%f, Heading=%f, Valid=%u \r\n",
 			PVT_Info->TOW,
 			PVT_Info->Year,
 			PVT_Info->Month,
@@ -744,7 +754,7 @@ static int decode_hyfix(raw_t *raw, int type)
 			PVT_Info->GroundSpeed * 1e-3,
 			PVT_Info->HeadMot * 1e-5,
 			PVT_Info->Valid);
-
+        #endif
         return 5; /* PVT */
     }
     return 0;

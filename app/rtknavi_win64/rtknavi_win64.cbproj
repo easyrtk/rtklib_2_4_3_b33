@@ -369,6 +369,9 @@
             <BuildOrder>42</BuildOrder>
             <BuildOrder>21</BuildOrder>
         </CppCompile>
+        <CppCompile Include="..\..\src\rcv\hyfix.c">
+            <BuildOrder>61</BuildOrder>
+        </CppCompile>
         <CppCompile Include="..\..\src\rcv\javad.c">
             <BuildOrder>43</BuildOrder>
             <BuildOrder>14</BuildOrder>
@@ -597,13 +600,13 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\src\rtcm2.c" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win32">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\src\rtcm2.c" Configuration="Release" Class="ProjectFile">
-                    <Platform Name="Win64">
+                    <Platform Name="Win32">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -677,7 +680,7 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployFile LocalName="Release_Build\rtknavi_win64.exe" Configuration="Release" Class="ProjectOutput">
+                <DeployFile LocalName="..\..\bin\rtknavi_win64.exe" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win64">
                         <RemoteName>rtknavi_win64.exe</RemoteName>
                         <Overwrite>true</Overwrite>
@@ -702,6 +705,12 @@
                 </DeployFile>
                 <DeployFile LocalName="..\..\src\ppp_ar.c" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\src\rcv\tersus.c" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
@@ -1157,6 +1166,12 @@
                     </Platform>
                 </DeployFile>
                 <DeployFile LocalName="..\..\src\rcvraw.c" Configuration="Release" Class="ProjectFile">
+                    <Platform Name="Win64">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\..\src\rcv\hyfix.c" Configuration="Release" Class="ProjectFile">
                     <Platform Name="Win64">
                         <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
